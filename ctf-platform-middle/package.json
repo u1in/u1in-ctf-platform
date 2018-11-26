@@ -1,0 +1,24 @@
+{
+  "name": "ctf-platform-middle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "author": "ulin <714896166@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "decimal.js": "^10.0.1",
+    "koa": "^2.6.2",
+    "koa-body": "^4.0.4",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.10.0",
+    "koa2-cors": "^2.0.6",
+    "marked": "^0.5.2",
+    "request": "^2.88.0",
+    "uuid": "^3.3.2",
+    "ws": "^6.1.2"
+  }
+}
