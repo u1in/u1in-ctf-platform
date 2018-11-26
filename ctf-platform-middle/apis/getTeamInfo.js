@@ -68,22 +68,25 @@ const team = async (ctx) => {
                         id: ctx.request.query.id,
                     });
                     if(username.code === 1) {
-                        ctx.response.body = json(1, 'Get Team Info Success!', {
+                        ctx.response.body = json(1, '获取团队信息成功', {
                             name: username.data.username,
                             info: result
                         });
                     }
                     else {
-                        throw 'Query Team Error.';
+                        throw '获取队伍名失败。';
                     }
+                }
+                else {
+                    throw '获取队伍列表失败'
                 }
             }
             else {
-                throw 'Query Submit Error.';
+                throw '获取历史记录失败';
             }
         }
     } catch (error) {
-        ctx.response.body = json(0);
+        ctx.response.body = json(0, error);
     }
 }
 

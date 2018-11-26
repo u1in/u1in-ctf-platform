@@ -26,7 +26,7 @@ const login = async ctx => {
                     //设置session返回
                     ctx.session.id = res.data.id;
                     ctx.session.token = token;
-                    ctx.response.body = json(1, 'Login Success!', {
+                    ctx.response.body = json(1, '登陆成功', {
                         id: res.data.id,
                         username: res.data.username,
                         token: token,
@@ -34,7 +34,7 @@ const login = async ctx => {
                 }
                 //无结果 账号密码不匹配
                 else {
-                    ctx.response.body = json(0, 'Login Fail!');
+                    ctx.response.body = json(0, '用户名密码不匹配');
                 }
             }
             else {

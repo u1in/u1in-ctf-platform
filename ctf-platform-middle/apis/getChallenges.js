@@ -45,17 +45,17 @@ const challenges = async (ctx) => {
                         result[processData[i].type].push(processData[i]);
                     }
                 }
-                ctx.response.body = json(1, 'Query Success', result);
+                ctx.response.body = json(1, '获取挑战成功', result);
             }
             else {
-                throw 'GET Submit Error!';
+                throw '查询历史记录失败';
             }
         }
         else {
-            throw resC.message.name;
+            throw '获取挑战失败';
         }
     } catch (error) {
-        ctx.response.body = json(0);
+        ctx.response.body = json(0, error);
         console.log(error)
     }
 }

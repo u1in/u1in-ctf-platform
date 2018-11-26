@@ -10,15 +10,20 @@
                 </div>
                 <div class="input-group" v-show="loginShow">
                     <input type="text" class="login-input" placeholder="团队名" v-model="username">
-                    <input type="password" class="login-input" placeholder="密码" v-model="password" @keydown.enter="login">
-                    <div class="submit" @click="login">登陆</div>
+                    <input type="password" class="login-input" placeholder="密码" v-model="password" @keydown.enter="login" ref="loginPassword">
+                    <div class="submit" v-show="loading === true" :style="{color: BACK_GROUND_COLOR}">
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                    </div>
+                    <div class="submit" @click="login" v-show="loading === false" :style="{color: BACK_GROUND_COLOR, backgroundColor: FORE_GROUND_COLOR}">登陆</div>
                 </div>
                 <div class="input-group" v-show="!loginShow">
                     <input type="text" class="login-input" placeholder="团队名,用于登陆" v-model="registerUsername">
-                    <!-- <input type="text" class="login-input" placeholder="邮箱地址,用于找回密码"> -->
                     <input type="password" class="login-input" placeholder="密码" v-model="registerPassword">
                     <input type="password" class="login-input" placeholder="重复密码" v-model="registerRepeatPassword" @keydown.enter="register">
-                    <div class="submit" @click="register">注册</div>
+                    <div class="submit" v-show="loading === true" :style="{color: BACK_GROUND_COLOR}">
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                    </div>
+                    <div class="submit" @click="register" v-show="loading === false" :style="{color: BACK_GROUND_COLOR, backgroundColor: FORE_GROUND_COLOR}">注册</div>
                 </div>
             </div>
         </div>
@@ -27,7 +32,7 @@
 
 <script>
 import Navigate from '@/components/Navigate';
-import { LOGIN_URL, REGISTER_URL } from '@/config/config';
+import { LOGIN_URL, REGISTER_URL, BACK_GROUND_COLOR, FORE_GROUND_COLOR} from '@/config/config';
 
 export default {
     components: {
@@ -35,41 +40,69 @@ export default {
     },
     data() {
         return {
+            BACK_GROUND_COLOR,
+            FORE_GROUND_COLOR,
+
             loginShow: true,
             username: undefined,
             password: undefined,
             registerUsername: undefined,
             registerPassword: undefined,
-            registerRepeatPassword: undefined
+            registerRepeatPassword: undefined,
+
+            loading: false,
         }
     },
     methods: {
         login() {
+            this.loading = true;
             let data = {
                 username: this.username,
                 password: this.password
             }
             this.$post(LOGIN_URL, data).then(resp => {
                 if(resp.code === 1) {
+                    this.loading = false;
                     localStorage.setItem('username', resp.data.username);
                     localStorage.setItem('userid', resp.data.id);
                     localStorage.setItem('token', resp.data.token);
                     this.$router.push('challenges');
                 }
+                else {
+                    this.loading = false;
+                    this.$message.error(resp.message);
+                }
             }).catch(error => {console.log(error)});
         },
         register () {
+            this.loading = true;
             if(this.registerPassword === this.registerRepeatPassword) {
                 let data = {
-                username: this.registerUsername,
-                password: this.registerPassword
-            }
-            this.$post(REGISTER_URL, data).then(resp => {
-                if(resp.code === 1) {
-                    this.loginShow = true;
-                    this.username = this.registerUsername;
+                    username: this.registerUsername,
+                    password: this.registerPassword
                 }
-            }).catch(error => {console.log(error)});
+                this.$post(REGISTER_URL, data).then(resp => {
+                    if(resp.code === 1) {
+                        this.loading = false;
+                        this.loginShow = true;
+                        this.$message({
+                            message: '注册成功',
+                            type: 'success'
+                        });
+                        this.username = this.registerUsername;
+                        this.$nextTick(function () {
+                            this.$refs.loginPassword.focus();
+                        })
+                    }
+                    else {
+                        this.loading = false;
+                        this.$message.error(resp.message);
+                    }
+                }).catch(error => {console.log(error)});
+            }
+            else {
+                this.loading = false;
+                this.$message.error('两次密码不一致。');
             }
         }
     }

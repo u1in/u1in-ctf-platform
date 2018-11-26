@@ -61,24 +61,24 @@ const submit = async ctx => {
                                     //将记录写入
                                     let addSubmit = await request.post(ADD_SUBMIT, data);
                                     if (addSubmit.code === 1) {
-                                        ctx.response.body = json(1, 'Flag is correct!');
+                                        ctx.response.body = json(1, '正确');
                                         let user = await request.post(GET_USER, {
                                             id: ctx.session.id,
                                         });
                                         if(user.code === 1) {
-                                            let text = user.data.username + 'got the FIRST BLOOD of' +getChallenges.data.name + '!';
+                                            let text = user.data.username + ' 获得 ' +getChallenges.data.name + ' 一血!';
                                             board(text);
                                         }
                                         else {
-                                            throw 'Get User Error!';
+                                            throw '获取用户失败';
                                         }
                                     }
                                     else {
-                                        throw 'Flag is correct BUT log error';
+                                        throw '成绩录入失败';
                                     }
                                 }
                                 else {
-                                    throw 'Update score error';
+                                    throw '更新题目分值失败';
                                 }
                             }
                             else {
@@ -93,7 +93,7 @@ const submit = async ctx => {
                                 //计算分值
                                 let score = calc(getChallenges.data.base, getChallenges.data.solves + 1);
                                 //更新分值
-                                let updateChallenge = await request.post('/updateChallenge', {
+                                let updateChallenge = await request.post(UPDATE_CHALLENGE, {
                                     challenge_id: ctx.request.body.id,
                                     solves: getChallenges.data.solves + 1,
                                     score: score,
@@ -101,26 +101,26 @@ const submit = async ctx => {
                                 if (updateChallenge.code === 1) {
                                     //更新成功
                                     //将记录写入
-                                    let addSubmit = await request.post('/addSubmit', data);
+                                    let addSubmit = await request.post(ADD_SUBMIT, data);
                                     if (addSubmit.code === 1) {
-                                        ctx.response.body = json(1, 'Flag is correct!');
-                                        let user = await request.post('/getUsers', {
+                                        ctx.response.body = json(1, '正确。');
+                                        let user = await request.post(GET_USER, {
                                             id: ctx.session.id,
                                         });
                                         if (user.code === 1) {
-                                            let text = user.data.username + ' got the FLAG of ' + getChallenges.data.name + '!';
+                                            let text = user.data.username + ' 解出 ' + getChallenges.data.name + '!';
                                             board(text);
                                         }
                                         else {
-                                            throw 'Get User Error!';
+                                            throw '获取用户失败';
                                         }
                                     }
                                     else {
-                                        throw 'Flag is correct BUT log error';
+                                        throw '成绩录入失败';
                                     }
                                 }
                                 else {
-                                    throw 'Update score error';
+                                    throw '更新题目分值失败';
                                 }
                             }
                         }
@@ -132,25 +132,25 @@ const submit = async ctx => {
                                 ip: ip(ctx),
                                 state: 0,
                             };
-                            await request.post('/addSubmit', data);
-                            ctx.response.body = json(0, 'Flag is not correct!');
+                            await request.post(ADD_SUBMIT, data);
+                            ctx.response.body = json(0, '错误');
                         }
                     }
                     else {
                         //获取题目失败
-                        throw 'Get Challenge Fail';
+                        throw '获取题目失败';
                     }
                 }
                 else {
                     //flag已经得到
-                    throw 'You\'ve got the flag!'
+                    throw '你已经答过了'
                 }
             }
 
         }
     }
     catch (error) {
-        ctx.response.body = json(0);
+        ctx.response.body = json(0, error);
         console.log(error)
     }
 }

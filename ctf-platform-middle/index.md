@@ -1,99 +1,29 @@
-# 测试markdown
+# 欢迎使用CTF Platform
 
-## 测试markdown
+> 感谢使用
 
-### 测试markdown
+**首先请确保您配置好了三端的config.js文件**
 
-#### 测试markdown
+CTF Platform是一套CTF平台代码，其中包含
 
-*测试markdown*
++ ctf-platform-frontend *(Vue前端代码)*
++ ctf-platform-middle *(Koa中间件代码)*
++ ctf-platfomr-backend *(Koa后端代码)*
 
-**测试markdown**
+其中前端负责展示，做到**尽量少的刷新**。
 
-***测试markdown***
+中间件负责中间**数据的验证**和**JSON的构建**。
 
-+ 测试markdown
-+ 测试markdown
-+ 测试markdown
+后端负责接收**可信数据**进行数据库操作
 
+平台特点：
 
-
-1. 测试markdown
-2. 测试markdown
-3. 测试markdown
-
-
-
-```js
-let a = '测试markdown';
-```
+1. markdown首页
+2. websocket排行榜
+3. 多样性的图表展示
+4. 成绩单的生成
 
 
 
-> 测试markdown
+项目地址：https://github.com/U1in/ctf-platform
 
-# 测试markdown
-
-## 测试markdown
-
-### 测试markdown
-
-#### 测试markdown
-
-*测试markdown*
-
-**测试markdown**
-
-***测试markdown***
-
-+ 测试markdown
-+ 测试markdown
-+ 测试markdown
-
-
-
-1. 测试markdown
-2. 测试markdown
-3. 测试markdown
-
-
-
-```js
-let a = '测试markdown';
-```
-
-
-
-> 测试markdown# 测试markdown
-
-## 测试markdown
-
-### 测试markdown
-
-#### 测试markdown
-
-*测试markdown*
-
-**测试markdown**
-
-***测试markdown***
-
-+ 测试markdown
-+ 测试markdown
-+ 测试markdown
-
-
-
-1. 测试markdown
-2. 测试markdown
-3. 测试markdown
-
-
-
-```js
-let a = '测试markdown';
-```
-
-
-
-> 测试markdown

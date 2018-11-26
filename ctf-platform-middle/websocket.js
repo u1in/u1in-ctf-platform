@@ -13,6 +13,11 @@ console.log(`
     WebSocket starting at ${WEBSOCKET_URL}:${WEBSOCKET_PORT}.
 `);
 
+//缓存
+var scoreboard = async () => {
+    await getScoreBoard();
+}
+
 //收集连接的客户端信息
 var clientList = [];
 
@@ -21,11 +26,11 @@ wss.on('connection', async (ws, req) => {
     //将客户端收录
     clientList.push(ws);
     //生成新的排行榜
-    let res = await getScoreBoard();
+
     let result = undefined;
 
     //获取不到排行榜，比赛刚刚开始
-    if (res.length == 0) {
+    if (scoreboard.length == 0) {
         let challenge =  await request.get(GET_CHALLENGE);
         if(challenge.code === 1) {
             let responseFormat = {
@@ -44,7 +49,7 @@ wss.on('connection', async (ws, req) => {
         //首次请求不返回info
         result = {
             info: '',
-            data: res,
+            data: scoreboard,
         }
     }
 
@@ -64,11 +69,11 @@ const board = async (text) => {
     //统计新的活跃客户端
     let newClient = [];
     //生成新的排行榜
-    let res = await getScoreBoard();
+    scoreboard = await getScoreBoard();
     //附带广播信息
     let result = {
         info: text,
-        data: res,
+        data: scoreboard,
     }
     //JSON化
     result = JSON.stringify(result);

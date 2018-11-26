@@ -23,10 +23,12 @@ const register = async ctx => {
                 ctx.response.body = json(1, 'Register Success');
             }
             else {
-                throw res.message.name;
+                if (res.message.name === 'SequelizeUniqueConstraintError') {
+                    throw '用户名已被占用';
+                }
             }
         } catch (error) {
-            ctx.response.body = json(0);
+            ctx.response.body = json(0, error);
             console.log(error)
         }
     }
