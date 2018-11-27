@@ -1,4 +1,5 @@
 let db = require('../model/db');
+const board =require('../websocket');
 
 let addSubmit = async (ctx) => {
     try {
@@ -18,6 +19,8 @@ let addSubmit = async (ctx) => {
         }
 
         ctx.response.body = JSON.stringify(response);
+        board(resS.dataValues.id)
+
     } catch (error) {
         let response = {
             code: 0,

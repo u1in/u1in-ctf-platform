@@ -1,4 +1,4 @@
-const { request, calc } = require('../tools');
+const { request, calc, id } = require('../tools');
 const Decimal = require('decimal.js');
 
 const getScoreBoard = async () => {

@@ -457,6 +457,9 @@ export default {
                     this.drawScoreboard();
                     
                 }
+                else {
+                    this.$message.error(resp.message);
+                }
             }).catch(error => {console.log(error)});
         }
     },

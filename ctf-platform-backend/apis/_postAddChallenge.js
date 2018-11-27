@@ -5,7 +5,7 @@ const add = async (ctx) => {
         let res = await db.Challenges.create(ctx.request.body);
         let response = {
             code: 1,
-            message: 'CREATE Success!',
+            message: '创建题目成功。',
             data: res
         }
         ctx.response.body = response;

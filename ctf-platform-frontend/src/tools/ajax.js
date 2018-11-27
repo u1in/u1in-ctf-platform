@@ -38,7 +38,6 @@ function ajax_post(url, data) {
         XHR.withCredentials = true;
         XHR.open('POST', BASE_URL + url, true);
         XHR.setRequestHeader("Content-Type", "application/json");
-        // XHR.setRequestHeader("X-CSRFToken", localStorage.getItem('token'));
 
         XHR.send(JSON.stringify(data));
 
