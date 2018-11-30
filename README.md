@@ -2,7 +2,27 @@
 
 >  emmm  这可能是我人生第一次写给别人用的代码。
 
-
+## 截图
+### 选手方
+![首页](./ctf-platform-image/index.png)
+ *（首页板块截图）*
+ 
+![题目](./ctf-platform-image/challenges.png)
+ *（挑战板块截图）*
+ 
+![排行](./ctf-platform-image/scoreboard.png)
+ *（排行板块截图）*
+ 
+![团队](./ctf-platform-image/team.png)
+ *（团队板块截图）*
+ 
+ 
+ ### 管理方
+ ![管理](./ctf-platform-image/admin.png)
+  *（管理员板块截图）*
+  
+ ![添加](./ctf-platform-image/add.png)
+  *（添加题目板块截图）*
 
 ## 前言
 
