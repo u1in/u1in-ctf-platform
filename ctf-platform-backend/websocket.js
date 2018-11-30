@@ -40,6 +40,7 @@ wss.on('connection', async (ws, req) => {
         ws.readyState = WebSocket.CLOSED;
     })
 
+    
     //发送初次信息
     ws.send(JSON.stringify(result));
 });
