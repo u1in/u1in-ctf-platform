@@ -2,7 +2,7 @@
   "name": "ctf-platform-fontend",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "U1in <714896166@qq.com>",
+  "author": "U1in <u1in@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

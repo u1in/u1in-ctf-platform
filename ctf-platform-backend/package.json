@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.js"
   },
-  "author": "ulin <714896166@qq.com>",
+  "author": "ulin <u1in@qq.com>",
   "license": "MIT",
   "dependencies": {
     "koa": "^2.6.2",
